@@ -1,0 +1,26 @@
+# ==============================================================================
+# SOFT PLUS SOVEREIGN MODELFILE — TAILORED FOR SAMSUNG 740U5M
+# Architect: Eng. Barakat | Hardware Upcycling Profile: i7-7500U + 940MX (2GB)
+# ==============================================================================
+FROM gemma2:2b
+
+# 1. Hybrid Layer Split: Load exact layers into NVIDIA 940MX (2GB VRAM safe zone <= 1.45GB)
+PARAMETER num_gpu 8
+
+# 2. CPU AVX2 Thread Allocation: Match i7-7500U physical/logical pipeline without OS starvation
+PARAMETER num_thread 3
+
+# 3. SmartCache-Aligned Batch Size (Fits within 4MB L3 Cache of i7-7500U)
+PARAMETER num_batch 256
+
+# 4. Controlled Context Window to prevent 8GB DDR4-2133 RAM swap thrashing
+PARAMETER num_ctx 2048
+
+# 5. Enable Zero-Copy NVMe Streaming from Samsung PM991 PCIe Gen3 x4 SSD
+PARAMETER use_mmap true
+PARAMETER use_mlock false
+
+SYSTEM """
+أنت تعمل ضمن بيئة سوفت بلاس (Soft Plus) السيادية المصممة بواسطة المهندس بركات.
+قدم إجابات هندسية دقيقة، مباشرة، وعالية الكفاءة.
+"""
